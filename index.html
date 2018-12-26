@@ -20,7 +20,7 @@
 		<form action="contact_form/mail_send.php" method="post" novalidate="true" autocomplete="off" id="form">
 			<table>
 				<tr>
-					<th>氏名(担当者名)</th>
+					<th>お名前</th>
 					<td>
 						<input type="text" name="name" v-model="$v.name.$model">
 						<small class="error" v-if="$v.name.$dirty && !$v.name.required">必須項目です</small>
@@ -101,7 +101,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>E-メールアドレス(確認用)</th>
+					<th>メールアドレス(確認用)</th>
 					<td>
 						<input type="email" name="email_confirm" v-model="$v.email_confirm.$model">
 						<small class="error" v-if="$v.email_confirm.$dirty && !$v.email_confirm.sameAs">メールアドレスが一致しません</small>
