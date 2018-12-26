@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Contact Form</title>
+	<script src='https://www.google.com/recaptcha/api.js?render=reCAPTCHAのSite keyを追加'></script>
+	<script>
+	grecaptcha.ready(function() {
+		grecaptcha.execute('reCAPTCHAのSecret keyを追加', {action: 'homepage'})
+		.then(function(token) {
+			$('#form').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+		});
+	});
+	</script>
+</head>
+<body>
+	<div id="app">
+		<h1>お問い合わせフォーム</h1>
+		<p class="js-alert" v-if="mailSend" v-cloak>送信完了しました</p>
+		<form action="contact_form/mail_send.php" method="post" novalidate="true" autocomplete="off" id="form">
+			<table>
+				<tr>
+					<th>氏名(担当者名)</th>
+					<td>
+						<input type="text" name="name" v-model="$v.name.$model">
+						<small class="error" v-if="$v.name.$dirty && !$v.name.required">必須項目です</small>
+					</td>
+				</tr>
+				<tr>
+					<th>ご住所<span>※</span></th>
+					<td>
+						<input type="text" name="address1_1" v-model="$v.address1_1.$model">-<input type="text" name="address1_2" v-model="$v.address1_2.$model">
+						<label for="address2">都道府県</label>
+						<select name="address2" id="address2" v-model="$v.address2.$model">
+							<option value="未選択">未選択</option>
+							<option value="北海道">北海道</option>
+							<option value="青森県">青森県</option>
+							<option value="岩手県">岩手県</option>
+							<option value="宮城県">宮城県</option>
+							<option value="秋田県">秋田県</option>
+							<option value="山形県">山形県</option>
+							<option value="福島県">福島県</option>
+							<option value="茨城県">茨城県</option>
+							<option value="栃木県">栃木県</option>
+							<option value="群馬県">群馬県</option>
+							<option value="埼玉県">埼玉県</option>
+							<option value="千葉県">千葉県</option>
+							<option value="東京都">東京都</option>
+							<option value="神奈川県">神奈川県</option>
+							<option value="新潟県">新潟県</option>
+							<option value="富山県">富山県</option>
+							<option value="石川県">石川県</option>
+							<option value="福井県">福井県</option>
+							<option value="山梨県">山梨県</option>
+							<option value="長野県">長野県</option>
+							<option value="岐阜県">岐阜県</option>
+							<option value="静岡県">静岡県</option>
+							<option value="愛知県">愛知県</option>
+							<option value="三重県">三重県</option>
+							<option value="滋賀県">滋賀県</option>
+							<option value="京都府">京都府</option>
+							<option value="大阪府">大阪府</option>
+							<option value="兵庫県">兵庫県</option>
+							<option value="奈良県">奈良県</option>
+							<option value="和歌山県">和歌山県</option>
+							<option value="鳥取県">鳥取県</option>
+							<option value="島根県">島根県</option>
+							<option value="岡山県">岡山県</option>
+							<option value="広島県">広島県</option>
+							<option value="山口県">山口県</option>
+							<option value="徳島県">徳島県</option>
+							<option value="香川県">香川県</option>
+							<option value="愛媛県">愛媛県</option>
+							<option value="高知県">高知県</option>
+							<option value="福岡県">福岡県</option>
+							<option value="佐賀県">佐賀県</option>
+							<option value="長崎県">長崎県</option>
+							<option value="熊本県">熊本県</option>
+							<option value="大分県">大分県</option>
+							<option value="宮崎県">宮崎県</option>
+							<option value="鹿児島県">鹿児島県</option>
+							<option value="沖縄県">沖縄県</option>
+						</select>
+						<input type="text" name="address3" v-model="$v.address3.$model">
+						<small class="error" v-if="addressError">必須項目です</small>
+					</td>
+				</tr>
+				<tr>
+					<th>TEL</th>
+					<td>
+						<input type="tel" name="tel1" v-model="$v.tel1.$model">-<input type="tel" name="tel2" v-model="$v.tel2.$model">-<input type="tel" name="tel3" v-model="$v.tel3.$model">
+						<small class="error" v-if="telError">必須項目です</small>
+					</td>
+				</tr>
+				<tr>
+					<th>メールアドレス</th>
+					<td>
+						<input type="email" name="email" v-model="$v.email.$model">
+						<small class="error" v-if="$v.email.$dirty && !$v.email.required">必須項目です</small>
+						<small class="error" v-if="!$v.email.email">無効なメールアドレスです</small>
+					</td>
+				</tr>
+				<tr>
+					<th>E-メールアドレス(確認用)</th>
+					<td>
+						<input type="email" name="email_confirm" v-model="$v.email_confirm.$model">
+						<small class="error" v-if="$v.email_confirm.$dirty && !$v.email_confirm.sameAs">メールアドレスが一致しません</small>
+					</td>
+				</tr>
+				<tr>
+					<th>お問い合わせ内容</th>
+					<td>
+						<textarea name="inquiry" cols="30" rows="5" v-model="$v.inquiry.$model"></textarea>
+						<small class="error" v-if="$v.inquiry.$dirty && !$v.inquiry.required">必須項目です</small>
+					</td>
+				</tr>
+			</table>
+			<div>
+				<input type="checkbox" name="agree" id="agree" v-model="$v.agree.$model">
+				<label for="agree">同意する</label>
+			</div>
+			<small class="error" v-if="$v.privacy_check.$dirty && !$v.privacy_check.required">必須項目です</small>
+			<div>
+				<button type="button" @click="formSubmit">送信する</button>
+				<button type="button" @click="reset">入力内容をリセット</button>
+			</div>
+			<modal v-if="showModal" @close="toggleModal"></modal>
+		</form>
+	</div>
+	<!-- Vue.jsの記述 -->
+	<link rel="stylesheet" type="text/css" href="contact_form/cf.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vuelidate/dist/vuelidate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vuelidate/dist/validators.min.js"></script>
+	<script src="contact_form/cf.js"></script>
+</body>
+</html>
