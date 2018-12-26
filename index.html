@@ -6,7 +6,7 @@
 	<script src='https://www.google.com/recaptcha/api.js?render=reCAPTCHAのSite keyを追加'></script>
 	<script>
 	grecaptcha.ready(function() {
-		grecaptcha.execute('reCAPTCHAのSecret keyを追加', {action: 'homepage'})
+		grecaptcha.execute('reCAPTCHAのSite keyを追加', {action: 'homepage'})
 		.then(function(token) {
 			$('#form').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
 		});
