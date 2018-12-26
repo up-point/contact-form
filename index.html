@@ -3,10 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Contact Form</title>
-	<script src='https://www.google.com/recaptcha/api.js?render=reCAPTCHAのSite keyを追加'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js?ver=1.8.3"></script>
+	<script src='https://www.google.com/recaptcha/api.js?render=reCAPTCHAのsite keyを追加'></script>
 	<script>
 	grecaptcha.ready(function() {
-		grecaptcha.execute('reCAPTCHAのSite keyを追加', {action: 'homepage'})
+		grecaptcha.execute('reCAPTCHAのsite keyを追加', {action: 'homepage'})
 		.then(function(token) {
 			$('#form').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
 		});
@@ -20,7 +21,7 @@
 		<form action="contact_form/mail_send.php" method="post" novalidate="true" autocomplete="off" id="form">
 			<table>
 				<tr>
-					<th>お名前</th>
+					<th>氏名(担当者名)</th>
 					<td>
 						<input type="text" name="name" v-model="$v.name.$model">
 						<small class="error" v-if="$v.name.$dirty && !$v.name.required">必須項目です</small>
@@ -101,7 +102,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>メールアドレス(確認用)</th>
+					<th>E-メールアドレス(確認用)</th>
 					<td>
 						<input type="email" name="email_confirm" v-model="$v.email_confirm.$model">
 						<small class="error" v-if="$v.email_confirm.$dirty && !$v.email_confirm.sameAs">メールアドレスが一致しません</small>
@@ -119,7 +120,7 @@
 				<input type="checkbox" name="agree" id="agree" v-model="$v.agree.$model">
 				<label for="agree">同意する</label>
 			</div>
-			<small class="error" v-if="$v.privacy_check.$dirty && !$v.privacy_check.required">必須項目です</small>
+			<small class="error" v-if="$v.agree.$dirty && !$v.agree.required">必須項目です</small>
 			<div>
 				<button type="button" @click="formSubmit">送信する</button>
 				<button type="button" @click="reset">入力内容をリセット</button>
