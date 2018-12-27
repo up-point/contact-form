@@ -21,9 +21,9 @@ $company_name = "株式会社hogehoge";
 // 送信後、お問い合せページにリダイレクト
 $redirect_url = "//" . $_SERVER["HTTP_HOST"] . "/contact/?send=success";
 
-$mail_subject = "株式会社hogehoge ホームページにお問い合わせいただきありがとうございます。";
+$mail_subject = "【株式会社hogehoge】お問い合わせいただきありがとうございます。";
 $body = <<<EOM
-株式会社hogehoge ホームページにお問い合わせいただきありがとうございます。
+株式会社hogehogeにお問い合わせいただきありがとうございます。
 以下の内容にて、お問い合わせを受け付けました。
 
 ---------------------------------------
@@ -57,10 +57,9 @@ mb_send_mail($to_mail, $mail_subject, $body, $header);
 //管理者への送信メール設定
 ini_set("default_charset","UTF-8");
 mb_language("ja");
-$mail_subject = "株式会社hogehoge ホームページよりお問い合わせを受信しました。";
+$mail_subject = "【株式会社hogehoge】お問い合わせを受信しました。";
 $body = <<<EOM
-株式会社hogehoge ホームページより
-以下の内容にて、お問い合わせを受け付けました。
+ホームページより以下の内容にて、お問い合わせを受け付けました。
 
 ---------------------------------------
 ■ お名前
