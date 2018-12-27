@@ -21,26 +21,27 @@ $company_name = "株式会社hogehoge";
 // 送信後、お問い合せページにリダイレクト
 $redirect_url = "//" . $_SERVER["HTTP_HOST"] . "/contact/?send=success";
 
-$mail_subject = "お問い合せありがとうございます。";
+$mail_subject = "株式会社hogehoge ホームページにお問い合わせいただきありがとうございます。";
 $body = <<<EOM
-お問い合せありがとうございます。
-以下の内容にて、お問い合せを受け付けました。
+株式会社hogehoge ホームページにお問い合わせいただきありがとうございます。
+以下の内容にて、お問い合わせを受け付けました。
+
 ---------------------------------------
-[お名前]
+■ お名前
 {$_POST['name']}
 
-[ご住所]
+■ ご住所
 {$_POST['address1_1']}-{$_POST['address1_2']}
 {$_POST['address2']}
 {$_POST['address3']}
 
-[TEL]
+■ TEL
 {$_POST['tel1']}-{$_POST['tel2']}-{$_POST['tel3']}
 
-[メールアドレス]
+■ メールアドレス
 {$_POST['email']}
 
-[お問い合わせ内容]
+■ お問い合わせ内容
 {$_POST['inquiry']}
 ---------------------------------------
 
@@ -56,25 +57,27 @@ mb_send_mail($to_mail, $mail_subject, $body, $header);
 //管理者への送信メール設定
 ini_set("default_charset","UTF-8");
 mb_language("ja");
-$mail_subject = "お問い合せを受信しました。";
+$mail_subject = "株式会社hogehoge ホームページよりお問い合わせを受信しました。";
 $body = <<<EOM
-以下の内容にて、お問い合せを受け付けました。
+株式会社hogehoge ホームページより
+以下の内容にて、お問い合わせを受け付けました。
+
 ---------------------------------------
-[お名前]
+■ お名前
 {$_POST['name']}
 
-[ご住所]
+■ ご住所
 {$_POST['address1_1']}-{$_POST['address1_2']}
 {$_POST['address2']}
 {$_POST['address3']}
 
-[TEL]
+■ TEL
 {$_POST['tel1']}-{$_POST['tel2']}-{$_POST['tel3']}
 
-[メールアドレス]
+■ メールアドレス
 {$_POST['email']}
 
-[お問い合わせ内容]
+■ お問い合わせ内容
 {$_POST['inquiry']}
 ---------------------------------------
 
